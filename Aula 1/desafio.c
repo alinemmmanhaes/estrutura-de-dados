@@ -3,19 +3,24 @@
 
 int** inverte2 (int n, int* vet){
     int** pont = malloc(n*sizeof(int*));
-    int indice = 0, menor = 0;
+    int indice = 0, menor = 0, *ptroca = 0;
+
     for(int i=0; i<n; i++){
-        menor = vet[i];
+        pont[i] = &vet[i];
+    }
+
+    for(int i=0; i<n; i++){
+        menor = *pont[i];
         indice = i;
         for(int j=i; j<n; j++){
-            if(vet[j] < menor){
-                menor = vet[j];
+            if(*pont[j] < menor){
+                menor = *pont[j];
                 indice = j;
             }
         }
-        vet[indice] = vet[i];
-        vet[i] = menor;
-        pont[i] = &vet[i];
+        ptroca = pont[indice];
+        pont[indice] = pont[i];
+        pont[i] = ptroca;
     }
     return pont;
 }
