@@ -12,8 +12,7 @@ struct cel{
 };
 
 Lista* CriaLista(){
-    Lista* l = malloc(sizeof(Lista));
-    l = NULL;
+    Lista* l = NULL;
 
     return l;
 }
