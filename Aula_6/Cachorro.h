@@ -11,4 +11,8 @@ int obtemCompCachorro(Cachorro* dog);
 
 void liberaCachorro(Cachorro* dog);
 
+void ImprimeCachorro(void* d);
+
+void atribuiNivelAgressividadeCachorro(Cachorro* dog, int tipo);
+
 #endif

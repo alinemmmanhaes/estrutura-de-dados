@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Lista.h"
+#include "Cachorro.h"
+#include "Gato.h"
 
 typedef struct cel Cel;
 
@@ -12,6 +14,7 @@ struct lista{
 struct cel{
     void* animal;
     int tipo;
+    imprimir funcImprime;
     Cel* prox;
     Cel* ant;
 };
@@ -23,11 +26,12 @@ Lista* CriaLista(){
     return l;
 }
 
-void InsereAnimal(Lista* l, void* animal, int tipo){
+void InsereAnimal(Lista* l, void* animal, int tipo, imprimir funcimp){
     Cel* cel = malloc(sizeof(Cel));
 
     cel->animal = animal;
     cel->tipo = tipo;
+    cel->funcImprime = funcimp;
 
     cel->ant = l->last;
     cel->prox = NULL;
@@ -45,7 +49,7 @@ void InsereAnimal(Lista* l, void* animal, int tipo){
 
 void RemoveAnimal(Lista* l, void* p){
     Cel* cel = NULL;
-    for(cel = l->first; cel!=NULL; cel = cel->prox){
+    for(cel = l->first; cel; cel = cel->prox){
         if(cel->animal == p){
             break;
         }
@@ -62,10 +66,10 @@ void RemoveAnimal(Lista* l, void* p){
         l->first = cel->prox;
     }
 
-    if(cel->prox){
+    if(cel->ant){
         cel->ant->prox = cel->prox;
     }
-    if(cel->ant){
+    if(cel->prox){
         cel->prox->ant = cel->ant;
     }
 
@@ -85,12 +89,43 @@ void LiberaLista(Lista* l){
 }
 
 int ExisteNaLista(Lista* l, void* p){
-    Cel* cel = NULL;
-    for(cel = l->first; cel!=NULL; cel = cel->prox){
-        if(cel->animal == p){
+    Cel* c = l->first;
+    while(c){
+        if(c->animal == p){
             return 1;
+            printf("achei");
         }
+        c = c->prox;
     }
 
     return 0;
+}
+
+void ImprimeLista(Lista* l){
+    Cel* c = l->first;
+    while (c){
+        c->funcImprime(c->animal);
+        c = c->prox;
+    }
+}
+
+float CalculaLista(Lista* l){
+    float receita = 0;
+    Cel* c = l->first;
+    while (c){
+        if(c->tipo == DOG){
+            receita += 40;
+            if(obtemCompCachorro(c->animal) == 1){ //1 = bravo
+                receita += 5;
+            }
+        }
+        else if(c->tipo == CAT){
+            receita += 30;
+            if(obtemCompGato(c->animal) == 1){ //1 = bravo
+                receita += 5;
+            }
+        }
+        c = c->prox;
+    }
+    return receita;
 }

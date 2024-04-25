@@ -23,3 +23,12 @@ void liberaCachorro(Cachorro* dog){
     free(dog->nome);
     free(dog);
 }
+
+void ImprimeCachorro(void* d){
+    Cachorro* dog = (Cachorro*) d;
+    printf("Cachorro %s\n", dog->nome);
+}
+
+void atribuiNivelAgressividadeCachorro(Cachorro* dog, int tipo){
+    dog->comportamento = tipo;
+}

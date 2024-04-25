@@ -11,4 +11,8 @@ int obtemCompGato(Gato* cat);
 
 void liberaGato(Gato* cat);
 
+void ImprimeGato(void* c);
+
+void atribuiNivelAgressividadeGato(Gato* cat, int tipo);
+
 #endif
