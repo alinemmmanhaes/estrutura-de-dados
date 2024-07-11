@@ -32,8 +32,14 @@ void imprimePalavra(Palavra* p){
     printf("%s frequencia %d\n", p->word, p->freq);
 }
 
-int comparaPalavras(const void* p1, const void* p2){
-    Palavra* pal1 = (Palavra*) p1;
-    Palavra* pal2 = (Palavra*) p2;
+int comparaPalavrasAlfabetica(const void* p1, const void* p2){
+    Palavra* pal1 = *(Palavra**) p1;
+    Palavra* pal2 = *(Palavra**) p2;
     return strcmp(pal1->word, pal2->word);
+}
+
+int comparaPalavrasFrequencia(const void* p1, const void* p2){
+    Palavra* pal1 = *(Palavra**) p1;
+    Palavra* pal2 = *(Palavra**) p2;
+    return pal1->freq - pal2->freq;
 }

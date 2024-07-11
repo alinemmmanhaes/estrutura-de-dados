@@ -15,6 +15,8 @@ void liberaPalavra(Palavra* p);
 
 void imprimePalavra(Palavra* p);
 
-int comparaPalavras(const void* p1, const void* p2);
+int comparaPalavrasAlfabetica(const void* p1, const void* p2);
+
+int comparaPalavrasFrequencia(const void* p1, const void* p2);
 
 #endif

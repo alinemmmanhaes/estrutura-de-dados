@@ -88,7 +88,8 @@ void imprimeOrdenado(Hash* hash){
         }
     }
 
-    qsort(palavras, hash->total, sizeof(Palavra*), comparaPalavras);
+    qsort(palavras, hash->total, sizeof(Palavra*), comparaPalavrasAlfabetica);
+    qsort(palavras, hash->total, sizeof(Palavra*), comparaPalavrasFrequencia);
 
     for(int i=0; i<hash->total; i++){
         imprimePalavra(palavras[i]);
